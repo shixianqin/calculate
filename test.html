@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Calculate.js</title>
+	<title>calculate.js</title>
 </head>
 <body>
 	<div>
@@ -11,7 +11,7 @@
 		<h1></h1>
 		<br>
 		<button>add</button>
-		<button>minus</button>
+		<button>subtract</button>
 		<button>multiply</button>
 		<button>divide</button>
 	</div>
@@ -25,14 +25,14 @@
 
 		var methods = {
 			add: "valueA + valueB",
-			minus: "valueA - valueB",
-			multiply: "valueA * valueB",
-			divide: "valueA / valueB"
+			sub: "valueA - valueB",
+			mul: "valueA * valueB",
+			div: "valueA / valueB"
 		};
 
 		for (var i = 0; i < btns.length; i++) {
 			btns[i].onclick = function(){
-				var wayName = this.innerText,
+				var wayName = this.innerText.substr(0, 3),
 					valueA = Number(inputs[0].value),
 					valueB = Number(inputs[1].value);
 
