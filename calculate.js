@@ -1,7 +1,7 @@
-/*
-    2018-5-23
-    https://github.com/shixianqin/calculate
-*/
+/*!
+ *   2018-5-23
+ *   https://github.com/shixianqin/calculate
+ */
 
 var Calculate = (function() {
 
@@ -28,18 +28,18 @@ var Calculate = (function() {
             return obj.max ? value / Math.pow(10, obj.max) : value;
         },
 
-        minus: function(a, b) {
+        sub: function(a, b) {
             return this.add(a, -b);
         },
 
-        multiply: function(a, b) {
+        mul: function(a, b) {
             var obj = translate(a, b),
                 value = obj.a * obj.b;
 
             return obj.max ? value / Math.pow(10, obj.max * 2) : value;
         },
 
-        divide: function(a, b) {
+        div: function(a, b) {
             var obj = translate(a, b);
             return obj.a / obj.b;
         }
