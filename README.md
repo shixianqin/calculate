@@ -10,21 +10,21 @@ Calculate.add(1.2, 2.2);
 
 
 //减法
-Calculate.minus(1.2, 2.2);
+Calculate.sub(1.2, 2.2);
 
 //value：-1
 //native js value：-1.0000000000000002
 
 
 //乘法
-Calculate.multiply(0.2, 3.2);
+Calculate.mul(0.2, 3.2);
 
 //value：0.64
 //native js value：0.6400000000000001
 
 
 //除法
-Calculate.divide(1.68, 3.2);
+Calculate.div(1.68, 3.2);
 
 //value：0.525
 //native js value：0.5249999999999999
