@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calculate.js</title>
+</head>
+<body>
+	<div>
+		<input type="number">
+		<input type="number">
+		<h1></h1>
+		<br>
+		<button>add</button>
+		<button>minus</button>
+		<button>multiply</button>
+		<button>divide</button>
+	</div>
+	<script src="calculate.js"></script>
+
+	<script>
+		
+		var btns = document.getElementsByTagName("button");
+		var inputs = document.getElementsByTagName("input");
+		var result = document.getElementsByTagName("h1")[0];
+
+		var methods = {
+			add: "valueA + valueB",
+			minus: "valueA - valueB",
+			multiply: "valueA * valueB",
+			divide: "valueA / valueB"
+		};
+
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].onclick = function(){
+				var wayName = this.innerText,
+					valueA = Number(inputs[0].value),
+					valueB = Number(inputs[1].value);
+
+				if(valueA === undefined || valueB === undefined){
+					return
+				}
+
+				result.innerHTML = 
+					"Calculate: " + Calculate[wayName](valueA, valueB) + 
+					"<br>" + 
+					"JavaScript: " + eval(methods[wayName]);
+			}
+		}
+
+	</script>
+</body>
+</html>
