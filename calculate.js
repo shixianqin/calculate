@@ -5,12 +5,13 @@
 
 var Calculate = {
 
-    _dotSize: function(num) {
-        return (num.toString().split('.')[1] || []).length;
-    },
-
     _convert: function(a, b) {
-        var times = Math.pow(10, Math.max(this._dotSize(a), this._dotSize(b)));
+        var dot = ".",
+            empty = "",
+            dotA = a.toString().split(dot)[1] || empty,
+            dotB = b.toString().split(dot)[1] || empty,
+            times = Math.pow(10, Math.max(dotA.length, dotB.length));
+
         return {
             a: a * times,
             b: b * times,
