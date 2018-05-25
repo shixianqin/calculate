@@ -1,5 +1,5 @@
 # calculate
-解决JavaScript浮点数计算不准确的问题
+解决JavaScript浮点数计算不精确的问题
 
 ```javascript
 //加法
