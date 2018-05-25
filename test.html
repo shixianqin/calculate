@@ -2,18 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>calculate.js</title>
+	<title>Calculate.js</title>
 </head>
 <body>
 	<div>
 		<input type="number">
 		<input type="number">
-		<h1></h1>
+		
+		<br><br>
+		<div class="result">
+			value : 
+			<br>
+			native :
+		</div>
 		<br>
-		<button>add</button>
-		<button>subtract</button>
-		<button>multiply</button>
-		<button>divide</button>
+
+		<button data-way="add">Addition ( + )</button>
+		<button data-way="sub">Subtraction ( - )</button>
+		<button data-way="mul">Multiplication ( * )</button>
+		<button data-way="div">Division ( / )</button>
+
+		<p>add/ sub/ mul/ div</p>
 	</div>
 	<script src="calculate.js"></script>
 
@@ -21,7 +30,7 @@
 		
 		var btns = document.getElementsByTagName("button");
 		var inputs = document.getElementsByTagName("input");
-		var result = document.getElementsByTagName("h1")[0];
+		var result = document.getElementsByTagName("div")[1];
 
 		var methods = {
 			add: "valueA + valueB",
@@ -32,18 +41,18 @@
 
 		for (var i = 0; i < btns.length; i++) {
 			btns[i].onclick = function(){
-				var wayName = this.innerText.substr(0, 3),
+				var way = this.getAttribute("data-way"),
 					valueA = Number(inputs[0].value),
 					valueB = Number(inputs[1].value);
 
-				if(valueA === undefined || valueB === undefined){
-					return
+				if(isNaN(valueA) || isNaN(valueB)){
+					return;
 				}
 
 				result.innerHTML = 
-					"value: " + Calculate[wayName](valueA, valueB) + 
+					"value : " + Calculate[way](valueA, valueB) + 
 					"<br>" + 
-					"native js value: " + eval(methods[wayName]);
+					"native : " + eval(methods[way]);
 			}
 		}
 
