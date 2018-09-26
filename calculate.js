@@ -88,7 +88,7 @@ var Calculate = {
         var obj = this._transform(a, b);
 
         // 整数相乘后，再除以放大倍数相乘的值
-        return (obj.a * obj.b) / (obj.times * obj.times);
+        return obj.a * obj.b / (obj.times * obj.times);
     },
 
 
