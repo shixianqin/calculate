@@ -24,7 +24,7 @@ var Calculate = {
      * 转换需要计算的两个值为整数
      * @param  {Number} a 数值 a
      * @param  {Number} b 数值 b
-     * @return {Object}   a: 数值 a 的转换结果，b: 数值 b 的转换结果，times: 增加的倍数
+     * @return {Object}   a: 数值 a 的转换结果，b: 数值 b 的转换结果，times: 放大的倍数
      */
     _transform: function(a, b) {
 
