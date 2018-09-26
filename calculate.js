@@ -32,9 +32,8 @@ var Calculate = {
 
             lengthB = this._getDecimalLength(b),
 
-            // 如果两个值都没有小数点，那么倍数直接等于 1，无需去调用 Math.pow
-            // 否则取最大值计算倍数，无需使用 Math.max， 因为只有两个值，简单处理就好
-            times = lengthA || lengthB ? Math.pow(10, lengthA > lengthB ? lengthA : lengthB) : 1,
+            // 计算需要放大的倍数
+            times = Math.pow(10, lengthA > lengthB ? lengthA : lengthB),
 
             valueA = a * times,
 
