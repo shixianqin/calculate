@@ -6,11 +6,9 @@
 var Calculate = {
 
     _convert: function(a, b) {
-        var dot = ".",
-            empty = "",
-            dotA = a.toString().split(dot)[1] || empty,
-            dotB = b.toString().split(dot)[1] || empty,
-            times = Math.pow(10, Math.max(dotA.length, dotB.length));
+        var dotA = a.toString().split(".")[1],
+            dotB = b.toString().split(".")[1],
+            times = dotA || dotB ? Math.pow(10, Math.max(dotA.length, dotB.length)) : 1;
 
         return {
             a: a * times,
