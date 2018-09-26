@@ -5,37 +5,104 @@
 
 var Calculate = {
 
-    _convert: function(a, b) {
-        var dotA = a.toString().split(".")[1],
-            dotB = b.toString().split(".")[1],
-            times = dotA || dotB ? Math.pow(10, Math.max(dotA.length, dotB.length)) : 1;
+    /**
+     * 获取小数点的长度，如果存在科学计数法 E 关键字，长度为 0
+     * @param  {Number} num 截取的数字
+     * @return {Number}     小数点的长度
+     */
+    _getDecimalLength: function(num) {
+
+        var value = num.toString(),
+
+            decimal = value.search("e") < 0 ? value.split(".")[1] : 0;
+
+        return decimal ? decimal.length : 0;
+    },
+
+
+    /**
+     * 转换需要计算的两个值为整数
+     * @param  {Number} a 数值 a
+     * @param  {Number} b 数值 b
+     * @return {Object}   a: 数值 a 的转换结果，b: 数值 b 的转换结果，times: 增加的倍数
+     */
+    _transform: function(a, b) {
+
+        var lengthA = this._getDecimalLength(a),
+
+            lengthB = this._getDecimalLength(b),
+
+            // 如果两个值都没有小数点，那么倍数直接等于 1，无需去调用 Math.pow
+            // 否则取最大值计算倍数，无需使用 Math.max， 因为只有两个值，简单处理就好
+            times = lengthA || lengthB ? Math.pow(10, lengthA > lengthB ? lengthA : lengthB) : 1,
+
+            valueA = a * times,
+
+            valueB = b * times;
 
         return {
-            a: a * times,
-            b: b * times,
+
+            // 有时数值乘以整数也会有计算误差，使用 parseInt 杜绝这种情况
+            // 科学计数法的数值忽略处理
+            a: lengthA ? parseInt(valueA) : valueA,
+
+            b: lengthB ? parseInt(valueB) : valueB,
+
             times: times
         }
     },
 
+
+    /**
+     * 加法计算
+     * @param {Number} a 数值 a
+     * @param {Number} b 数值 b
+     */
     add: function(a, b) {
-        var obj = this._convert(a, b),
-            value = obj.a + obj.b;
-        return obj.times > 1 ? value / obj.times : value;
+
+        var obj = this._transform(a, b);
+
+        // 整数相加后，再除以放大的倍数
+        return (obj.a + obj.b) / obj.times;
     },
 
+
+    /**
+     * 减法计算
+     * @param {Number} a 数值 a
+     * @param {Number} b 数值 b
+     */
     sub: function(a, b) {
+
+        // a - b = a + (-b)
         return this.add(a, -b);
     },
 
+
+    /**
+     * 乘法计算
+     * @param {Number} a 数值 a
+     * @param {Number} b 数值 b
+     */
     mul: function(a, b) {
-        var obj = this._convert(a, b),
-            value = obj.a * obj.b,
-            times = obj.times;
-        return times > 1 ? value / (times * times) : value;
+
+        var obj = this._transform(a, b);
+
+        // 整数相乘后，再除以放大倍数相乘的值
+        return (obj.a * obj.b) / (obj.times * obj.times);
     },
 
+
+    /**
+     * 除法计算
+     * @param {Number} a 数值 a
+     * @param {Number} b 数值 b
+     */
     div: function(a, b) {
-        var obj = this._convert(a, b);
+
+        var obj = this._transform(a, b);
+
+        // 除法直接计算，无论放大多少倍，都是一样
         return obj.a / obj.b;
     }
 };
