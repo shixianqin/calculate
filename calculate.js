@@ -41,11 +41,11 @@ var Calculate = {
 
         return {
 
-            // 有时数值乘以整数也会有计算误差，使用 parseInt 杜绝这种情况
+            // 有时数值乘以整数也会有计算误差，使用 Math.round 杜绝这种情况
             // 科学计数法的数值忽略处理
-            a: lengthA ? parseInt(valueA) : valueA,
+            a: lengthA ? Math.round(valueA) : valueA,
 
-            b: lengthB ? parseInt(valueB) : valueB,
+            b: lengthB ? Math.round(valueB) : valueB,
 
             times: times
         }
