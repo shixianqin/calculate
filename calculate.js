@@ -1,107 +1,60 @@
-/*!
- *   2018-5-23
- *   https://github.com/shixianqin/calculate
+/**
+ * 获取一个数值的小数位长度
+ * @param value
+ * @returns {number|*}
  */
+function getDigits (value) {
+  if (isFinite(value)) {
+    const valueStr = value.toString();
+    const digits = (/e/i).test(valueStr) ? null : valueStr.split('.')[1];
+    return digits ? digits.length : 0;
+  }
+  return value;
+}
 
-var Calculate = {
+/**
+ * 把两个数值转换为整数，因为整数计算没有精确度的问题
+ * @param a
+ * @param b
+ * @returns {{a: number, times: number, b: number}}
+ */
+function transform (a, b) {
+  const maxDigits = Math.max(getDigits(a), getDigits(b));
+  const times = Math.pow(10, maxDigits);
+  const valueA = a * times;
+  const valueB = b * times;
 
-    /**
-     * 获取小数点的长度，如果存在科学计数法 E 关键字，长度为 0
-     * @param  {Number} num 截取的数字
-     * @return {Number}     小数点的长度
-     */
-    _getDecimalLength: function(num) {
-
-        var value = num.toString(),
-
-            decimal = value.search("e") < 0 ? value.split(".")[1] : 0;
-
-        return decimal ? decimal.length : 0;
-    },
-
-
-    /**
-     * 转换需要计算的两个值为整数
-     * @param  {Number} a 数值 a
-     * @param  {Number} b 数值 b
-     * @return {Object}   a: 数值 a 的转换结果，b: 数值 b 的转换结果，times: 放大的倍数
-     */
-    _transform: function(a, b) {
-
-        var lengthA = this._getDecimalLength(a),
-
-            lengthB = this._getDecimalLength(b),
-
-            // 计算需要放大的倍数
-            times = Math.pow(10, lengthA > lengthB ? lengthA : lengthB),
-
-            valueA = a * times,
-
-            valueB = b * times;
-
-        return {
-
-            // 有时数值乘以整数也会有计算误差，使用 Math.round 杜绝这种情况
-            // 科学计数法的数值忽略处理
-            a: lengthA ? Math.round(valueA) : valueA,
-
-            b: lengthB ? Math.round(valueB) : valueB,
-
-            times: times
-        }
-    },
+  // 有时浮点数乘以整10的数也会有计算误差，比如：1.23456 * 100000 = 123456.00000000001
+  // 需要使用 Math.round 杜绝这种情况
+  return {
+    times,
+    a: Math.round(valueA),
+    b: Math.round(valueB)
+  }
+}
 
 
-    /**
-     * 加法计算
-     * @param {Number} a 数值 a
-     * @param {Number} b 数值 b
-     */
-    add: function(a, b) {
+export const Calculate = {
+  // 加法计算
+  add (a, b) {
+    const model = transform(a, b);
+    return (model.a + model.b) / model.times; // 整数相加后，再除以放大的倍数
+  },
 
-        var obj = this._transform(a, b);
+  // 减法计算
+  sub (a, b) {
+    return this.add(a, -b); // a - b = a + (-b)
+  },
 
-        // 整数相加后，再除以放大的倍数
-        return (obj.a + obj.b) / obj.times;
-    },
+  // 乘法计算
+  mul (a, b) {
+    const model = transform(a, b);
+    return model.a * model.b / (model.times * model.times); // 整数相乘后，再除以放大倍数相乘的值
+  },
 
-
-    /**
-     * 减法计算
-     * @param {Number} a 数值 a
-     * @param {Number} b 数值 b
-     */
-    sub: function(a, b) {
-
-        // a - b = a + (-b)
-        return this.add(a, -b);
-    },
-
-
-    /**
-     * 乘法计算
-     * @param {Number} a 数值 a
-     * @param {Number} b 数值 b
-     */
-    mul: function(a, b) {
-
-        var obj = this._transform(a, b);
-
-        // 整数相乘后，再除以放大倍数相乘的值
-        return obj.a * obj.b / (obj.times * obj.times);
-    },
-
-
-    /**
-     * 除法计算
-     * @param {Number} a 数值 a
-     * @param {Number} b 数值 b
-     */
-    div: function(a, b) {
-
-        var obj = this._transform(a, b);
-
-        // 除法直接计算，无论放大多少倍，都是一样
-        return obj.a / obj.b;
-    }
+  // 除法计算
+  div (a, b) {
+    const model = transform(a, b);
+    return model.a / model.b; // 除法直接计算，无论放大多少倍，都是一样
+  }
 };
