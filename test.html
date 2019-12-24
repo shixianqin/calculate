@@ -18,8 +18,8 @@
 </head>
 <body>
 <div>
-  <input type="number" value="0.68">
-  <input type="number" value="0.17">
+  <input type="text" value="0.68">
+  <input type="text" value="0.17">
 
   <br><br>
   <div class="result">
@@ -55,10 +55,6 @@ window.onload = function () {
       var way = this.getAttribute("data-method");
       var valueA = Number(inputs[0].value);
       var valueB = Number(inputs[1].value);
-
-      if (isNaN(valueA) || isNaN(valueB)) {
-        return;
-      }
 
       result.innerHTML =
         "value : " + Calculate[way](valueA, valueB) +

@@ -5,11 +5,15 @@
 function getDecimalLength (value) {
   if (isFinite(value)) {
     var valueStr = value.toString();
-    // 如果转换为字符串后存在 `e` 字符串，则表示该数据已经大到需要使用科学表达式来显示，这么大的数据，小数位的值是直接忽略的
-    var decimal = (/e/i).test(valueStr) ? '' : valueStr.split('.')[1];
-    return decimal ? decimal.length : 0;
+    // 如果转换为字符串后出现 `e` 符号，则表示该数据已经大到需要使用科学表达式来显示，这么大的数据，小数位的值是直接忽略的
+    if (!(/e/.test(valueStr))) {
+      var decimal = valueStr.split('.')[1];
+      if (decimal) {
+        return decimal.length;
+      }
+    }
   }
-  return value;
+  return 0;
 }
 
 /**
