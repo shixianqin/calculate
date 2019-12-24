@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Calculate.js</title>
+  <meta charset="UTF-8">
+  <title>Calculate.js</title>
+  <style>
+    input {
+      width: 200px;
+      height: 36px;
+      padding: 0 10px;
+			font-size: 16px;
+    }
+
+    button {
+			height: 30px;
+    }
+  </style>
 </head>
 <body>
-	<div>
-		<input type="number" value="0.68">
-		<input type="number" value="0.17">
-		
-		<br><br>
-		<div class="result">
-			value : 
-			<br>
-			native :
-		</div>
-		<br>
+<div>
+  <input type="number" value="0.68">
+  <input type="number" value="0.17">
 
-		<button data-way="add">Addition ( + )</button>
-		<button data-way="sub">Subtraction ( - )</button>
-		<button data-way="mul">Multiplication ( * )</button>
-		<button data-way="div">Division ( / )</button>
+  <br><br>
+  <div class="result">
+    value : 0.85
+    <br>
+    native : 0.8500000000000001
+  </div>
+  <br>
 
-		<p>add/ sub/ mul/ div</p>
-	</div>
-	<script src="calculate.js"></script>
+  <button data-method="add">add ( + )</button>
+  <button data-method="subtract">subtract ( - )</button>
+  <button data-method="multiply">multiply ( * )</button>
+  <button data-method="divide">divide ( / )</button>
+</div>
+<script src="calculate.js"></script>
 
-	<script>
-		
-		var btns = document.getElementsByTagName("button");
-		var inputs = document.getElementsByTagName("input");
-		var result = document.getElementsByTagName("div")[1];
+<script>
+window.onload = function () {
 
-		var methods = {
-			add: "valueA + valueB",
-			sub: "valueA - valueB",
-			mul: "valueA * valueB",
-			div: "valueA / valueB"
-		};
+  var btns = document.getElementsByTagName("button");
+  var inputs = document.getElementsByTagName("input");
+  var result = document.getElementsByTagName("div")[1];
 
-		for (var i = 0; i < btns.length; i++) {
-			btns[i].onclick = function(){
-				var way = this.getAttribute("data-way"),
-					valueA = Number(inputs[0].value),
-					valueB = Number(inputs[1].value);
+  var methods = {
+    add: "valueA + valueB",
+    subtract: "valueA - valueB",
+    multiply: "valueA * valueB",
+    divide: "valueA / valueB"
+  };
 
-				if(isNaN(valueA) || isNaN(valueB)){
-					return;
-				}
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].onclick = function () {
+      var way = this.getAttribute("data-method");
+      var valueA = Number(inputs[0].value);
+      var valueB = Number(inputs[1].value);
 
-				result.innerHTML =  "value : " + Calculate[way](valueA, valueB) + 
-						    "<br>" + 
-						    "native : " + eval(methods[way]);
-			}
-		}
+      if (isNaN(valueA) || isNaN(valueB)) {
+        return;
+      }
 
-	</script>
+      result.innerHTML =
+        "value : " + Calculate[way](valueA, valueB) +
+        "<br>" +
+        "native : " + eval(methods[way]);
+    }
+  }
+
+};
+</script>
 </body>
 </html>
