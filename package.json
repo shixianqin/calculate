@@ -1,10 +1,9 @@
 {
   "name": "@shixianqin/calculate",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "解决 JavaScript 浮点数计算不精确的问题",
-  "main": "src/calculate.js",
+  "main": "index.ts",
   "scripts": {
-    "build": "tsc ./src/calculate.ts"
   },
   "repository": {
     "type": "git",
