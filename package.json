@@ -1,0 +1,22 @@
+{
+  "name": "@shixianqin/calculate",
+  "version": "1.0.0",
+  "description": "解决 JavaScript 浮点数计算不精确的问题",
+  "main": "src/calculate.js",
+  "scripts": {
+    "build": "tsc ./src/calculate.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shixianqin/calculate.git"
+  },
+  "keywords": [
+    "calculate"
+  ],
+  "author": "shixianqin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shixianqin/calculate/issues"
+  },
+  "homepage": "https://github.com/shixianqin/calculate#readme"
+}
