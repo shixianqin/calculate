@@ -60,6 +60,12 @@ const Calculate: { [key: string]: (x: number, y: number) => number } = {
   divide(x, y) {
     const {a, b} = transform(x, y);
     return a / b; // 除法直接计算，无论放大多少倍，都是一样
+  },
+
+  // 求余运算
+  remainder(x, y) {
+    const {a, b, times} = transform(x, y);
+    return (a % b) / times;
   }
 };
 
