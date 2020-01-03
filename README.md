@@ -26,8 +26,7 @@ import {
   divide,
   modulo,
   round465,
-  toFixed,
-  transform
+  toFixed
 } from '@shixianqin/calculate';
 ```
 
