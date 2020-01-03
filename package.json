@@ -1,22 +1,28 @@
 {
   "name": "@shixianqin/calculate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "解决 JavaScript 浮点数计算不精确的问题",
-  "main": "src/calculate.js",
+  "main": "src/core.ts",
   "scripts": {
-    "build": "tsc ./src/calculate.ts"
+    "build": "npx tsc ./src/core.ts --outDir lib --target es6 --removeComments true",
+    "test": "npx tsc ./src/core.ts --outDir test --module commonjs && mocha test/test-mocha.js && rm -rf ./test/core.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shixianqin/calculate.git"
   },
   "keywords": [
-    "calculate"
+    "calculate",
+    "js calculate"
   ],
   "author": "shixianqin",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shixianqin/calculate/issues"
   },
-  "homepage": "https://github.com/shixianqin/calculate#readme"
+  "homepage": "https://github.com/shixianqin/calculate#readme",
+  "devDependencies": {
+    "mocha": "^6.2.2",
+    "typescript": "^3.7.4"
+  }
 }
