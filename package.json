@@ -13,7 +13,8 @@
   },
   "keywords": [
     "calculate",
-    "js calculate"
+    "js calculate",
+    "toFixed"
   ],
   "author": "shixianqin",
   "license": "MIT",
