@@ -40,7 +40,7 @@ import * as calculate from '@shixianqin/calculate/lib/core';
 
 #### 加法
 + 类型
-```javascript
+```typescript
 add(x: number, y: number): number;
 ```
 
@@ -132,3 +132,13 @@ toFixed(567.89, -2); // 600
 ```
 
 
+## 精确度问题的原因和解决方案
+[JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)
+
+
+## 参考
+[number-precision](https://github.com/nefe/number-precision)  
+[bignumber.js](https://github.com/MikeMcl/bignumber.js/)  
+[big.js](https://github.com/MikeMcl/big.js/)  
+[decimal.js](https://github.com/MikeMcl/decimal.js/)  
+[BigInteger.js](https://github.com/peterolson/BigInteger.js)  
